@@ -1,0 +1,9 @@
+{
+  "name": "shared-ui-tokens",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/ui-tokens/src",
+  "projectType": "library",
+  "tags": ["scope:shared", "type:util"],
+  "// targets": "to see all targets run: nx show project shared-ui-tokens --web",
+  "targets": {}
+}

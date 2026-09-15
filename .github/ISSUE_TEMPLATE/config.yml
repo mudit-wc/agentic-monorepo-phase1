@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Feature / User Story
+    url: https://dev.azure.com/<ADO_ORG>/<ADO_PROJECT>/_workitems/create/User%20Story
+    about: Features and user stories are tracked in Azure Boards, not GitHub Issues.

@@ -1,0 +1,35 @@
+name: Bug report
+description: Something is broken
+title: '[AB#<id>] '
+labels: [bug]
+body:
+  - type: input
+    id: workitem
+    attributes:
+      label: Azure DevOps work item
+      placeholder: AB#123
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+    validations:
+      required: true
+  - type: input
+    id: project
+    attributes:
+      label: Affected Nx project(s)
+      placeholder: dashboard-feature

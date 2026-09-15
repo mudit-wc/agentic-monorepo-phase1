@@ -1,0 +1,15 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-theme="dark"] {
+  --color-text-primary: var(--color-neutral-50);
+  --color-text-secondary: var(--color-neutral-300);
+  --color-text-inverse: var(--color-neutral-900);
+  --color-surface-page: var(--color-neutral-900);
+  --color-surface-card: var(--color-neutral-800);
+  --color-surface-raised: var(--color-neutral-700);
+  --color-surface-inverse: var(--color-neutral-0);
+  --color-border-subtle: var(--color-neutral-700);
+  --color-border-strong: var(--color-neutral-500);
+}

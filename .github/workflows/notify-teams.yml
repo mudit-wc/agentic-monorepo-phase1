@@ -1,0 +1,62 @@
+# Posts CI failures on main and new releases to a Teams channel.
+# Requires repo secret TEAMS_WEBHOOK_URL (Teams → channel → Workflows → "Post to a channel when a webhook request is received").
+name: Notify Teams
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'release' || github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - name: Build card
+        id: card
+        env:
+          EVENT: ${{ github.event_name }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          RUN_SHA: ${{ github.event.workflow_run.head_sha }}
+          RELEASE_NAME: ${{ github.event.release.name }}
+          RELEASE_URL: ${{ github.event.release.html_url }}
+          RELEASE_BODY: ${{ github.event.release.body }}
+        run: |
+          if [ "$EVENT" = "release" ]; then
+            TITLE="Release published: $RELEASE_NAME"
+            TEXT=$(printf '%s' "$RELEASE_BODY" | head -c 1500 | jq -Rs .)
+            URL="$RELEASE_URL"
+          else
+            TITLE="CI failed on main — $REPO"
+            TEXT=$(printf 'Commit %s' "$RUN_SHA" | jq -Rs .)
+            URL="$RUN_URL"
+          fi
+          jq -n --arg t "$TITLE" --argjson x "$TEXT" --arg u "$URL" '{
+            type: "message",
+            attachments: [{
+              contentType: "application/vnd.microsoft.card.adaptive",
+              content: {
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                type: "AdaptiveCard", version: "1.4",
+                body: [
+                  { type: "TextBlock", size: "Medium", weight: "Bolder", text: $t },
+                  { type: "TextBlock", wrap: true, text: $x }
+                ],
+                actions: [{ type: "Action.OpenUrl", title: "Open", url: $u }]
+              }
+            }]
+          }' > card.json
+
+      - name: Post to Teams
+        env:
+          WEBHOOK: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          if [ -z "$WEBHOOK" ]; then echo "TEAMS_WEBHOOK_URL not set; skipping."; exit 0; fi
+          curl -fsS -H 'Content-Type: application/json' -d @card.json "$WEBHOOK"

@@ -1,0 +1,50 @@
+name: Agent task
+description: A well-scoped task suitable for assignment to the Copilot coding agent
+title: '[AB#<id>] '
+labels: [agent-task]
+body:
+  - type: input
+    id: workitem
+    attributes:
+      label: Azure DevOps work item
+      description: The linked story/task, e.g. AB#123
+      placeholder: AB#123
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What should be true when this is done? Be specific and testable.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Which projects/libs may be touched (e.g. libs/dashboard/feature). Anything explicitly out of scope?
+    validations:
+      required: true
+  - type: input
+    id: figma
+    attributes:
+      label: Figma frame URL
+      placeholder: https://www.figma.com/design/...
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+  - type: checkboxes
+    id: guardrails
+    attributes:
+      label: Guardrails acknowledged
+      options:
+        - label: Task fits in a single PR (< ~400 changed lines)
+          required: true
+        - label: No secrets, infra, or pipeline changes required
+          required: true

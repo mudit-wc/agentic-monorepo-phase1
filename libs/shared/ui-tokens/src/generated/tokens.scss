@@ -1,0 +1,204 @@
+
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+$color-brand-primary: #0f62fe !default; // Primary brand / interactive
+$color-brand-primary-hover: #0353e9 !default;
+$color-brand-primary-active: #002d9c !default;
+$color-brand-secondary: #393939 !default;
+$color-neutral-0: #ffffff !default;
+$color-neutral-50: #f4f4f4 !default;
+$color-neutral-100: #e0e0e0 !default;
+$color-neutral-200: #c6c6c6 !default;
+$color-neutral-300: #a8a8a8 !default;
+$color-neutral-400: #8d8d8d !default;
+$color-neutral-500: #6f6f6f !default;
+$color-neutral-600: #525252 !default;
+$color-neutral-700: #393939 !default;
+$color-neutral-800: #262626 !default;
+$color-neutral-900: #161616 !default;
+$color-status-success: #24a148 !default;
+$color-status-warning: #f1c21b !default;
+$color-status-error: #da1e28 !default;
+$color-status-info: #0043ce !default;
+$spacing-0: 0px !default;
+$spacing-1: 4px !default;
+$spacing-2: 8px !default;
+$spacing-3: 12px !default;
+$spacing-4: 16px !default;
+$spacing-5: 20px !default;
+$spacing-6: 24px !default;
+$spacing-8: 32px !default;
+$spacing-10: 40px !default;
+$spacing-12: 48px !default;
+$spacing-16: 64px !default;
+$radius-none: 0px !default;
+$radius-sm: 4px !default;
+$radius-md: 8px !default;
+$radius-lg: 12px !default;
+$radius-full: 9999px !default;
+$size-touch-target: 44px !default; // Minimum interactive hit area
+$size-container-max: 1280px !default;
+$z-dropdown: 1000 !default;
+$z-sticky: 1100 !default;
+$z-modal: 1300 !default;
+$z-toast: 1400 !default;
+$font-family-sans: Inter, 'Segoe UI', system-ui, sans-serif !default;
+$font-family-mono: 'JetBrains Mono', Consolas, monospace !default;
+$font-size-xs: 12px !default;
+$font-size-sm: 14px !default;
+$font-size-md: 16px !default;
+$font-size-lg: 18px !default;
+$font-size-xl: 20px !default;
+$font-size-2xl: 24px !default;
+$font-size-3xl: 32px !default;
+$font-size-4xl: 40px !default;
+$font-weight-regular: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+$font-line-height-tight: 1.2 !default;
+$font-line-height-normal: 1.5 !default;
+$font-line-height-relaxed: 1.7 !default;
+$shadow-sm: 0px 1px 2px 0px rgba(0,0,0,0.08) !default;
+$shadow-md: 0px 4px 12px 0px rgba(0,0,0,0.12) !default;
+$shadow-lg: 0px 12px 32px 0px rgba(0,0,0,0.16) !default;
+$motion-duration-fast: 120ms !default;
+$motion-duration-normal: 200ms !default;
+$motion-duration-slow: 320ms !default;
+$motion-easing-standard: cubic-bezier(0.2, 0, 0, 1) !default;
+$motion-easing-emphasized: cubic-bezier(0.3, 0, 0.8, 0.15) !default;
+$color-text-primary: $color-neutral-900 !default;
+$color-text-secondary: $color-neutral-600 !default;
+$color-text-inverse: $color-neutral-0 !default;
+$color-text-link: $color-brand-primary !default;
+$color-text-error: $color-status-error !default;
+$color-surface-page: $color-neutral-0 !default;
+$color-surface-card: $color-neutral-50 !default;
+$color-surface-raised: $color-neutral-0 !default;
+$color-surface-inverse: $color-neutral-900 !default;
+$color-border-subtle: $color-neutral-100 !default;
+$color-border-strong: $color-neutral-300 !default;
+$color-border-focus: $color-brand-primary !default;
+
+$tokens: (
+  'color': (
+    'brand': (
+      'primary': $color-brand-primary,
+      'primary-hover': $color-brand-primary-hover,
+      'primary-active': $color-brand-primary-active,
+      'secondary': $color-brand-secondary
+    ),
+    'neutral': (
+      '0': $color-neutral-0,
+      '50': $color-neutral-50,
+      '100': $color-neutral-100,
+      '200': $color-neutral-200,
+      '300': $color-neutral-300,
+      '400': $color-neutral-400,
+      '500': $color-neutral-500,
+      '600': $color-neutral-600,
+      '700': $color-neutral-700,
+      '800': $color-neutral-800,
+      '900': $color-neutral-900
+    ),
+    'status': (
+      'success': $color-status-success,
+      'warning': $color-status-warning,
+      'error': $color-status-error,
+      'info': $color-status-info
+    ),
+    'text': (
+      'primary': $color-text-primary,
+      'secondary': $color-text-secondary,
+      'inverse': $color-text-inverse,
+      'link': $color-text-link,
+      'error': $color-text-error
+    ),
+    'surface': (
+      'page': $color-surface-page,
+      'card': $color-surface-card,
+      'raised': $color-surface-raised,
+      'inverse': $color-surface-inverse
+    ),
+    'border': (
+      'subtle': $color-border-subtle,
+      'strong': $color-border-strong,
+      'focus': $color-border-focus
+    )
+  ),
+  'spacing': (
+    '0': $spacing-0,
+    '1': $spacing-1,
+    '2': $spacing-2,
+    '3': $spacing-3,
+    '4': $spacing-4,
+    '5': $spacing-5,
+    '6': $spacing-6,
+    '8': $spacing-8,
+    '10': $spacing-10,
+    '12': $spacing-12,
+    '16': $spacing-16
+  ),
+  'radius': (
+    'none': $radius-none,
+    'sm': $radius-sm,
+    'md': $radius-md,
+    'lg': $radius-lg,
+    'full': $radius-full
+  ),
+  'size': (
+    'touch-target': $size-touch-target,
+    'container-max': $size-container-max
+  ),
+  'z': (
+    'dropdown': $z-dropdown,
+    'sticky': $z-sticky,
+    'modal': $z-modal,
+    'toast': $z-toast
+  ),
+  'font': (
+    'family': (
+      'sans': $font-family-sans,
+      'mono': $font-family-mono
+    ),
+    'size': (
+      'xs': $font-size-xs,
+      'sm': $font-size-sm,
+      'md': $font-size-md,
+      'lg': $font-size-lg,
+      'xl': $font-size-xl,
+      '2xl': $font-size-2xl,
+      '3xl': $font-size-3xl,
+      '4xl': $font-size-4xl
+    ),
+    'weight': (
+      'regular': $font-weight-regular,
+      'medium': $font-weight-medium,
+      'semibold': $font-weight-semibold,
+      'bold': $font-weight-bold
+    ),
+    'line-height': (
+      'tight': $font-line-height-tight,
+      'normal': $font-line-height-normal,
+      'relaxed': $font-line-height-relaxed
+    )
+  ),
+  'shadow': (
+    'sm': $shadow-sm,
+    'md': $shadow-md,
+    'lg': $shadow-lg
+  ),
+  'motion': (
+    'duration': (
+      'fast': $motion-duration-fast,
+      'normal': $motion-duration-normal,
+      'slow': $motion-duration-slow
+    ),
+    'easing': (
+      'standard': $motion-easing-standard,
+      'emphasized': $motion-easing-emphasized
+    )
+  )
+);

@@ -1,0 +1,126 @@
+# Release pipeline: build once, promote the same artifact through dev → qa → prod.
+# Triggered on merges to main and on version tags. PR validation lives in GitHub Actions.
+#
+# One-time setup (see docs/sdlc-playbook/05-cicd.md):
+#   1. Create ADO environments: dev, qa, prod (prod/qa with Approvals + Checks)
+#   2. Create service connection "azure-swa-wif" using Workload Identity Federation (no secrets)
+#   3. Create variable group "agentic-monorepo-release" with SWA_NAME_DEV / SWA_NAME_QA / SWA_NAME_PROD, RESOURCE_GROUP
+#   4. Connect this GitHub repo to ADO Pipelines and point it at this file
+
+trigger:
+  branches:
+    include: [main]
+  tags:
+    include: ['v*']
+
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: agentic-monorepo-release
+  - name: APP_NAME
+    value: agentic-monorepo-main
+  - name: NODE_VERSION
+    value: '24.x'
+  - name: SERVICE_CONNECTION
+    value: azure-swa-wif
+  - name: NX_NO_CLOUD
+    value: 'true'
+
+stages:
+  # ────────────────────────────────────────────────────────────────────────────
+  - stage: Build
+    displayName: Build & package
+    jobs:
+      - job: build
+        displayName: nx build (production)
+        steps:
+          - checkout: self
+            fetchDepth: 0
+            persistCredentials: false
+
+          - task: NodeTool@0
+            displayName: Use Node $(NODE_VERSION)
+            inputs:
+              versionSpec: $(NODE_VERSION)
+
+          - task: Cache@2
+            displayName: Cache npm
+            inputs:
+              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: 'npm | "$(Agent.OS)"'
+              path: $(npm_config_cache)
+
+          - script: npm ci
+            displayName: npm ci
+
+          - script: npx nx run $(APP_NAME):build --configuration=production
+            displayName: nx build
+
+          - script: |
+              set -e
+              echo "commit=$(Build.SourceVersion)" > dist/apps/$(APP_NAME)/browser/build-info.txt
+              echo "build=$(Build.BuildNumber)" >> dist/apps/$(APP_NAME)/browser/build-info.txt
+            displayName: Stamp build info
+
+          - publish: dist/apps/$(APP_NAME)/browser
+            artifact: web
+            displayName: Publish artifact
+
+  # ────────────────────────────────────────────────────────────────────────────
+  - stage: Dev
+    displayName: Deploy → dev
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - template: templates/deploy-swa.yml
+        parameters:
+          environment: dev
+          swaName: $(SWA_NAME_DEV)
+          serviceConnection: $(SERVICE_CONNECTION)
+          resourceGroup: $(RESOURCE_GROUP)
+
+  # ────────────────────────────────────────────────────────────────────────────
+  - stage: QA
+    displayName: Deploy → qa
+    dependsOn: Dev
+    condition: succeeded()
+    jobs:
+      - template: templates/deploy-swa.yml
+        parameters:
+          environment: qa
+          swaName: $(SWA_NAME_QA)
+          serviceConnection: $(SERVICE_CONNECTION)
+          resourceGroup: $(RESOURCE_GROUP)
+
+  # ────────────────────────────────────────────────────────────────────────────
+  - stage: Prod
+    displayName: Deploy → prod
+    dependsOn: QA
+    # Only tagged releases reach prod; approval gate is configured on the environment
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
+    jobs:
+      - template: templates/deploy-swa.yml
+        parameters:
+          environment: prod
+          swaName: $(SWA_NAME_PROD)
+          serviceConnection: $(SERVICE_CONNECTION)
+          resourceGroup: $(RESOURCE_GROUP)
+
+  # ────────────────────────────────────────────────────────────────────────────
+  - stage: Notify
+    displayName: Notify Teams
+    dependsOn: [Dev, QA, Prod]
+    condition: always()
+    jobs:
+      - job: notify
+        steps:
+          - checkout: none
+          - template: templates/notify-teams.yml
+            parameters:
+              webhookUrl: $(TEAMS_WEBHOOK_URL)
+              title: 'Release $(Build.SourceBranchName) — $(Agent.JobStatus)'
+              text: 'Build $(Build.BuildNumber) · commit $(Build.SourceVersion) · Dev: $(stageDependencies.Dev.result) · QA: $(stageDependencies.QA.result) · Prod: $(stageDependencies.Prod.result)'
+              linkUrl: '$(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)'

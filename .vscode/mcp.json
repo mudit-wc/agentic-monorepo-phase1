@@ -1,0 +1,68 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vscode/main/src/vs/workbench/contrib/mcp/common/mcpSchema.json",
+  "inputs": [
+    {
+      "id": "ado_org",
+      "type": "promptString",
+      "description": "Azure DevOps organization name (the <org> in https://dev.azure.com/<org>)"
+    },
+    {
+      "id": "ado_project",
+      "type": "promptString",
+      "description": "Default Azure DevOps project name"
+    }
+  ],
+  "servers": {
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "azure-devops": {
+      "type": "http",
+      "url": "https://mcp.dev.azure.com/${input:ado_org}"
+    },
+    "azure-devops-local": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp",
+        "${input:ado_org}",
+        "-d",
+        "core",
+        "work",
+        "work-items",
+        "repositories",
+        "pipelines",
+        "wiki"
+      ],
+      "env": {
+        "ado_mcp_project": "${input:ado_project}"
+      }
+    },
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
+    },
+    "figma-desktop": {
+      "type": "http",
+      "url": "http://127.0.0.1:3845/mcp"
+    },
+    "microsoft365": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@softeria/ms-365-mcp-server",
+        "--org-mode",
+        "--preset",
+        "outlook,teams,teams-write",
+        "--message-signoff-suffix",
+        " — sent by Copilot agent"
+      ],
+      "env": {
+        "MS365_MCP_TENANT_ID": "common"
+      }
+    }
+  }
+}

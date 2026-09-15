@@ -1,0 +1,45 @@
+# Posts an Adaptive Card to a Teams channel via a Workflows (Power Automate) incoming-webhook URL.
+# Store the URL as a secret pipeline variable TEAMS_WEBHOOK_URL; never commit it.
+parameters:
+  - name: webhookUrl
+    type: string
+  - name: title
+    type: string
+  - name: text
+    type: string
+  - name: linkUrl
+    type: string
+    default: ''
+
+steps:
+  - bash: |
+      set -e
+      if [ -z "$WEBHOOK" ]; then
+        echo "TEAMS_WEBHOOK_URL not set; skipping Teams notification."
+        exit 0
+      fi
+      cat > card.json <<EOF
+      {
+        "type": "message",
+        "attachments": [{
+          "contentType": "application/vnd.microsoft.card.adaptive",
+          "content": {
+            "\$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+            "type": "AdaptiveCard",
+            "version": "1.4",
+            "body": [
+              { "type": "TextBlock", "size": "Medium", "weight": "Bolder", "text": "${{ parameters.title }}" },
+              { "type": "TextBlock", "wrap": true, "text": "${{ parameters.text }}" }
+            ],
+            "actions": [
+              { "type": "Action.OpenUrl", "title": "Open pipeline run", "url": "${{ parameters.linkUrl }}" }
+            ]
+          }
+        }]
+      }
+      EOF
+      curl -fsS -H 'Content-Type: application/json' -d @card.json "$WEBHOOK"
+    displayName: Post Teams notification
+    env:
+      WEBHOOK: ${{ parameters.webhookUrl }}
+    continueOnError: true

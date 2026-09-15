@@ -1,0 +1,20 @@
+{
+  "color": {
+    "$type": "color",
+    "text": {
+      "primary": { "$value": "{color.neutral.50}" },
+      "secondary": { "$value": "{color.neutral.300}" },
+      "inverse": { "$value": "{color.neutral.900}" }
+    },
+    "surface": {
+      "page": { "$value": "{color.neutral.900}" },
+      "card": { "$value": "{color.neutral.800}" },
+      "raised": { "$value": "{color.neutral.700}" },
+      "inverse": { "$value": "{color.neutral.0}" }
+    },
+    "border": {
+      "subtle": { "$value": "{color.neutral.700}" },
+      "strong": { "$value": "{color.neutral.500}" }
+    }
+  }
+}

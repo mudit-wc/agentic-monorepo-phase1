@@ -1,0 +1,102 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+/** Primary brand / interactive */
+export const ColorBrandPrimary: string;
+export const ColorBrandPrimaryHover: string;
+export const ColorBrandPrimaryActive: string;
+export const ColorBrandSecondary: string;
+export const ColorNeutral0: string;
+export const ColorNeutral50: string;
+export const ColorNeutral100: string;
+export const ColorNeutral200: string;
+export const ColorNeutral300: string;
+export const ColorNeutral400: string;
+export const ColorNeutral500: string;
+export const ColorNeutral600: string;
+export const ColorNeutral700: string;
+export const ColorNeutral800: string;
+export const ColorNeutral900: string;
+export const ColorStatusSuccess: string;
+export const ColorStatusWarning: string;
+export const ColorStatusError: string;
+export const ColorStatusInfo: string;
+export const ColorTextPrimary: string;
+export const ColorTextSecondary: string;
+export const ColorTextInverse: string;
+export const ColorTextLink: string;
+export const ColorTextError: string;
+export const ColorSurfacePage: string;
+export const ColorSurfaceCard: string;
+export const ColorSurfaceRaised: string;
+export const ColorSurfaceInverse: string;
+export const ColorBorderSubtle: string;
+export const ColorBorderStrong: string;
+export const ColorBorderFocus: string;
+export const Spacing0: string;
+export const Spacing1: string;
+export const Spacing2: string;
+export const Spacing3: string;
+export const Spacing4: string;
+export const Spacing5: string;
+export const Spacing6: string;
+export const Spacing8: string;
+export const Spacing10: string;
+export const Spacing12: string;
+export const Spacing16: string;
+export const RadiusNone: string;
+export const RadiusSm: string;
+export const RadiusMd: string;
+export const RadiusLg: string;
+export const RadiusFull: string;
+/** Minimum interactive hit area */
+export const SizeTouchTarget: string;
+export const SizeContainerMax: string;
+export const ZDropdown: number;
+export const ZSticky: number;
+export const ZModal: number;
+export const ZToast: number;
+export const FontFamilySans: [string, string, string, string];
+export const FontFamilyMono: [string, string, string];
+export const FontSizeXs: string;
+export const FontSizeSm: string;
+export const FontSizeMd: string;
+export const FontSizeLg: string;
+export const FontSizeXl: string;
+export const FontSize2xl: string;
+export const FontSize3xl: string;
+export const FontSize4xl: string;
+export const FontWeightRegular: number;
+export const FontWeightMedium: number;
+export const FontWeightSemibold: number;
+export const FontWeightBold: number;
+export const FontLineHeightTight: number;
+export const FontLineHeightNormal: number;
+export const FontLineHeightRelaxed: number;
+export const ShadowSm: {
+  offsetX: string;
+  offsetY: string;
+  blur: string;
+  spread: string;
+  color: string;
+};
+export const ShadowMd: {
+  offsetX: string;
+  offsetY: string;
+  blur: string;
+  spread: string;
+  color: string;
+};
+export const ShadowLg: {
+  offsetX: string;
+  offsetY: string;
+  blur: string;
+  spread: string;
+  color: string;
+};
+export const MotionDurationFast: string;
+export const MotionDurationNormal: string;
+export const MotionDurationSlow: string;
+export const MotionEasingStandard: [number, number, number, number];
+export const MotionEasingEmphasized: [number, number, number, number];

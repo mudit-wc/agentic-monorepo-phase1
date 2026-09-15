@@ -1,0 +1,16 @@
+# Default owners for everything in the repo
+*                         @mudit-wc
+
+# Domain ownership
+/apps/                    @mudit-wc
+/libs/dashboard/          @mudit-wc
+/libs/shared/             @mudit-wc
+
+# Platform / governance — changes here require platform owner review
+/.github/                 @mudit-wc
+/pipelines/               @mudit-wc
+/.vscode/mcp.json         @mudit-wc
+/nx.json                  @mudit-wc
+/eslint.config.mjs        @mudit-wc
+/commitlint.config.mjs    @mudit-wc
+/AGENTS.md                @mudit-wc
