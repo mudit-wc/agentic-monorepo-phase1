@@ -49,6 +49,7 @@ Build a greenfield Nx Angular monorepo wired into an end-to-end agentic developm
 1. Scaffold Nx workspace (Angular preset, standalone components, latest Angular): `apps/shell` + example libs (`feature` / `ui` / `data-access` / `util`) with Nx module-boundary tags.
 2. Tooling: ESLint + `@nx/enforce-module-boundaries`, Prettier, commitlint (Conventional Commits), husky hooks, `.editorconfig`, pinned Node version (`.nvmrc` / volta).
 3. Repo governance: CODEOWNERS, PR template with AB# work-item link field, issue templates, branch strategy doc (trunk-based, short-lived branches named `feature/AB#<id>-desc`).
+4. **Connect the codebase to GitHub** (AB#21): create `mudit-wc/agentic-monorepo-phase1` (public — rulesets/CodeQL/Dependabot are free on public repos for personal accounts), push `main`, apply repo settings via `tools/scripts/configure-github-repo.ps1` (squash-only, security features, Actions allow-list, labels, `protect-main` ruleset), connect Azure Boards, verify the `AB#` loop. Checklist: `docs/sdlc-playbook/10-external-setup-runbook.md` §A–B.
 
 ### Phase 2 — Agentic Layer (Copilot customization + MCP)
 

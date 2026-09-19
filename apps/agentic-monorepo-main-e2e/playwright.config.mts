@@ -4,6 +4,8 @@ import { workspaceRoot } from '@nx/devkit';
 
 // For CI, you may want to set BASE_URL to the deployed application.
 const baseURL = process.env['BASE_URL'] || 'http://localhost:4200';
+// CI installs only chromium (see .github/workflows/ci.yml); run the full matrix locally
+const isCI = !!process.env['CI'];
 
 /**
  * Read environment variables from file.
@@ -41,16 +43,18 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    ...(isCI
+      ? []
+      : [
+          {
+            name: 'firefox',
+            use: { ...devices['Desktop Firefox'] },
+          },
+          {
+            name: 'webkit',
+            use: { ...devices['Desktop Safari'] },
+          },
+        ]),
 
     // Uncomment for mobile browsers support
     /* {

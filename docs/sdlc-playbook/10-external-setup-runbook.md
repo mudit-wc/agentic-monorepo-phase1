@@ -6,15 +6,19 @@ Everything that must be configured **outside** this repository, in dependency or
 
 **Need:** GitHub account `mudit-wc` (personal) or an org; GitHub CLI logged in (`gh auth login`).
 
-- [ ] Create repo: `gh repo create agentic-monorepo-phase1 --private --source . --push` (from this folder, after `git init -b main` and first commit)
-- [ ] Settings → **General**: default branch `main`; allow squash merge only; auto-delete head branches
-- [ ] Settings → **Branches / Rulesets** → protect `main`: require PR, 1 approval, CODEOWNERS review, required checks (`validate`, `e2e`, `pr-hygiene`, `CodeQL`, `Dependency review`), linear history, block force-push, include admins
-  - _Private repo on Free plan: branch protection requires Pro/Team. Either upgrade, make the repo public, or create a free Organization (Team plan needed for private protection)._
-- [ ] Settings → **Code security**: enable Dependabot alerts + security updates, secret scanning + push protection, CodeQL (default setup is fine; the workflow file also works)
-- [ ] Settings → **Actions → General**: allow GitHub + verified creator actions; workflow permissions "read", allow Actions to create PRs (for Dependabot)
+> Live values (AB#21, 2026-09-19): **https://github.com/mudit-wc/agentic-monorepo-phase1** — **public**, default branch `main`.
+> Decision: public because the account is on GitHub Free; rulesets, CodeQL and Dependabot are free on public repos only.
+> Everything below except the Copilot coding-agent toggle is applied by `tools/scripts/configure-github-repo.ps1` (idempotent; re-run after changing it).
+
+- [x] Create repo: `gh repo create agentic-monorepo-phase1 --public --source . --remote origin --push`
+- [x] Settings → **General**: default branch `main`; allow squash merge only; auto-delete head branches
+- [x] Settings → **Rules → Rulesets** → `protect-main`: require PR (1 approval, CODEOWNERS review, resolved threads, squash only), required checks (`Lint · Test · Build (affected)`, `E2E (affected)`, `PR hygiene`, `Analyze (javascript-typescript)`, `Dependency review`), linear history, block force-push and deletion
+  - _Solo-maintainer compromise: the **Admin** role is a bypass actor in **pull-request mode only** — the owner can merge their own PR without a second reviewer, but can never push to `main` directly. Remove the bypass actor once a second reviewer joins._
+- [x] Settings → **Code security**: Dependabot alerts + security updates, secret scanning + push protection enabled. CodeQL runs via `.github/workflows/codeql.yml` (advanced setup; do **not** also enable default setup — they conflict)
+- [x] Settings → **Actions → General**: allowed actions = GitHub-owned + verified creators + patterns `nrwl/nx-set-shas@*`, `anchore/sbom-action@*`; workflow permissions `read`; Actions may create/approve PRs (Dependabot)
 - [ ] Settings → **Secrets and variables → Actions**: `TEAMS_WEBHOOK_URL` (after step E)
-- [ ] Settings → **Copilot → Coding agent**: enable; firewall: allow `registry.npmjs.org`, `playwright.azureedge.net`
-- [ ] Labels: create `agent-task`, `dependencies`, `ci`
+- [ ] Settings → **Copilot → Coding agent**: enable (needs Copilot Pro/Pro+); firewall: allow `registry.npmjs.org`, `playwright.azureedge.net`
+- [x] Labels: `agent-task`, `dependencies`, `ci`
 
 ## B. Azure DevOps
 
@@ -25,8 +29,8 @@ Everything that must be configured **outside** this repository, in dependency or
 - [x] Create org at https://dev.azure.com → **New organization** (pick region for data residency)
 - [x] Create project `agentic-workflow` — **Agile** process, Git (repo unused; code stays in GitHub), private
 - [ ] Project settings → **Boards → Project configuration**: iterations (2-week sprints, 6 ahead), area paths per domain (`Dashboard`, `Shared`, `Platform`)
-- [ ] Project settings → **Boards → GitHub connections** → connect `mudit-wc/agentic-monorepo-phase1` (installs the **Azure Boards** GitHub App; approve in GitHub)
-- [ ] Verify: create a test Story, note its ID, later push a commit with `AB#<id>` and confirm the link appears
+- [x] Project settings → **Boards → GitHub connections** → connect `mudit-wc/agentic-monorepo-phase1` (installs the **Azure Boards** GitHub App; approve in GitHub) — done 2026-09-19
+- [ ] Verify: create a test Story, note its ID, later push a commit with `AB#<id>` and confirm the link appears (first verification: PR for AB#21)
 - [x] Update `.github/ISSUE_TEMPLATE/config.yml` with your `<ADO_ORG>/<ADO_PROJECT>` URL
 - [ ] Update `.vscode/mcp.json` `azure-devops` default answer prompt (or just enter org when prompted)
 
