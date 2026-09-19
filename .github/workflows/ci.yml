@@ -37,7 +37,7 @@ jobs:
       - run: npm ci
 
       - name: Derive affected SHAs
-        uses: nrwl/nx-set-shas@v4
+        uses: nrwl/nx-set-shas@v5
         with:
           main-branch-name: main
 
@@ -77,7 +77,7 @@ jobs:
 
       - run: npm ci
 
-      - uses: nrwl/nx-set-shas@v4
+      - uses: nrwl/nx-set-shas@v5
         with:
           main-branch-name: main
 
