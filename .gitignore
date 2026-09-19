@@ -46,3 +46,7 @@ Thumbs.db
 .claude/settings.local.json
 
 .angular
+
+# Azure Functions local secrets (tools/ado-audit-hook)
+local.settings.json
+tools/**/dist

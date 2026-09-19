@@ -45,6 +45,7 @@ Multiple items: `AB#123, AB#124`.
 - **Write** only after user confirmation: create child Tasks, update State, add comments, link PR
 - Never change State to Closed manually — let the GitHub integration do it on merge
 - When posting a comment, prefix with `[Copilot agent]`
+- **After any write to a work item** (create, field update, tags, dates, links, state), immediately run the `@ado-auditor` procedure (or hand off to `@ado-auditor <id>`) so a `[Copilot agent][audit] rev N` comment explains what changed. No update is complete without its audit comment.
 
 ## Useful prompts
 

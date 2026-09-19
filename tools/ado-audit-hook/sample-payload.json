@@ -1,0 +1,56 @@
+{
+  "subscriptionId": "00000000-0000-0000-0000-000000000000",
+  "notificationId": 1,
+  "id": "sample-workitem-updated",
+  "eventType": "workitem.updated",
+  "publisherId": "tfs",
+  "resource": {
+    "id": 2,
+    "workItemId": 1,
+    "rev": 3,
+    "revisedBy": {
+      "displayName": "mudit bajpai",
+      "uniqueName": "m.bajpai0112@gmail.com"
+    },
+    "revisedDate": "2026-09-16T09:12:44.123Z",
+    "fields": {
+      "System.Rev": { "oldValue": "2", "newValue": "3" },
+      "System.ChangedDate": {
+        "oldValue": "2026-09-16T04:28:00.85Z",
+        "newValue": "2026-09-16T09:12:44.123Z"
+      },
+      "System.State": { "oldValue": "To Do", "newValue": "Doing" },
+      "System.Reason": {
+        "oldValue": "Added to backlog",
+        "newValue": "Work started"
+      },
+      "System.Tags": { "oldValue": "", "newValue": "mcp; phase-1" },
+      "Microsoft.VSTS.Scheduling.TargetDate": {
+        "newValue": "2026-10-07T00:00:00Z"
+      }
+    },
+    "relations": {
+      "added": [
+        {
+          "rel": "System.LinkTypes.Hierarchy-Forward",
+          "url": "https://dev.azure.com/mbajpai0112/_apis/wit/workItems/12"
+        }
+      ]
+    },
+    "revision": {
+      "id": 1,
+      "rev": 3,
+      "fields": {
+        "System.WorkItemType": "Epic",
+        "System.TeamProject": "agentic-workflow",
+        "System.Title": "Agentic Workflow Phase 1",
+        "System.State": "Doing"
+      }
+    }
+  },
+  "resourceVersion": "1.0",
+  "resourceContainers": {
+    "project": { "id": "738b43ce-dcbf-4e02-813d-83941c826dde" }
+  },
+  "createdDate": "2026-09-16T09:12:45Z"
+}

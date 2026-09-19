@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "ADO_ORG_URL": "https://dev.azure.com/mbajpai0112",
+    "ADO_PAT": "<personal access token with Work Items: Read & write>",
+    "WEBHOOK_SECRET": "<random string; also set as Basic-auth password on the ADO service hook>"
+  }
+}

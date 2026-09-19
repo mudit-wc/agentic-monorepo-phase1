@@ -2,14 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vscode/main/src/vs/workbench/contrib/mcp/common/mcpSchema.json",
   "inputs": [
     {
-      "id": "ado_org",
+      "id": "ado-pat-b64-v2",
       "type": "promptString",
-      "description": "Azure DevOps organization name (the <org> in https://dev.azure.com/<org>)"
-    },
-    {
-      "id": "ado_project",
-      "type": "promptString",
-      "description": "Default Azure DevOps project name"
+      "description": "Azure DevOps PAT, base64-encoded as '<email>:<pat>'",
+      "password": true
     }
   ],
   "servers": {
@@ -19,7 +15,7 @@
     },
     "azure-devops": {
       "type": "http",
-      "url": "https://mcp.dev.azure.com/${input:ado_org}"
+      "url": "https://mcp.dev.azure.com/mbajpai0112"
     },
     "azure-devops-local": {
       "type": "stdio",
@@ -27,17 +23,20 @@
       "args": [
         "-y",
         "@azure-devops/mcp",
-        "${input:ado_org}",
+        "mbajpai0112",
         "-d",
         "core",
         "work",
         "work-items",
         "repositories",
         "pipelines",
-        "wiki"
+        "wiki",
+        "--authentication",
+        "pat"
       ],
       "env": {
-        "ado_mcp_project": "${input:ado_project}"
+        "ado_mcp_project": "agentic-workflow",
+        "PERSONAL_ACCESS_TOKEN": "${input:ado-pat-b64-v2}"
       }
     },
     "figma": {

@@ -20,12 +20,14 @@ Everything that must be configured **outside** this repository, in dependency or
 
 **Need:** Microsoft account; ADO org name (you choose); project name.
 
-- [ ] Create org at https://dev.azure.com → **New organization** (pick region for data residency)
-- [ ] Create project `agentic-monorepo-phase1` — **Agile** process, Git (repo unused; code stays in GitHub), private
+> Live values: org **`mbajpai0112`**, project **`agentic-workflow`** → https://dev.azure.com/mbajpai0112/agentic-workflow
+
+- [x] Create org at https://dev.azure.com → **New organization** (pick region for data residency)
+- [x] Create project `agentic-workflow` — **Agile** process, Git (repo unused; code stays in GitHub), private
 - [ ] Project settings → **Boards → Project configuration**: iterations (2-week sprints, 6 ahead), area paths per domain (`Dashboard`, `Shared`, `Platform`)
 - [ ] Project settings → **Boards → GitHub connections** → connect `mudit-wc/agentic-monorepo-phase1` (installs the **Azure Boards** GitHub App; approve in GitHub)
 - [ ] Verify: create a test Story, note its ID, later push a commit with `AB#<id>` and confirm the link appears
-- [ ] Update `.github/ISSUE_TEMPLATE/config.yml` with your `<ADO_ORG>/<ADO_PROJECT>` URL
+- [x] Update `.github/ISSUE_TEMPLATE/config.yml` with your `<ADO_ORG>/<ADO_PROJECT>` URL
 - [ ] Update `.vscode/mcp.json` `azure-devops` default answer prompt (or just enter org when prompted)
 
 ## C. Azure (deploy target)

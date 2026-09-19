@@ -74,6 +74,8 @@ When creating a new lib, always use the Nx generator with the correct `--tags` a
 
 This project uses Azure DevOps. Always check whether the Azure DevOps MCP server has a tool relevant to the user's request (work items, iterations, pipelines, wiki). When asked to plan or implement a story, fetch the work item first and quote its acceptance criteria back before proposing changes.
 
+Every write to a work item (any type, any field — including tags, dates, iteration, links) must be followed by a `[Copilot agent][audit] rev N` comment describing the diff. Use `@ado-auditor` for this; see `.github/agents/ado-auditor.agent.md`.
+
 ## Figma
 
 When a Figma URL is provided, use the Figma MCP tools to read the design context (layout, variables, components) before writing UI code. Map Figma variables to tokens in `@agentic/shared-ui-tokens`; if a token is missing, add it there rather than inlining a value.
@@ -86,4 +88,4 @@ When a Figma URL is provided, use the Figma MCP tools to read the design context
 - Do not modify `.github/workflows/`, `pipelines/`, `nx.json`, or `eslint.config.mjs` unless the task explicitly asks for it — these are platform-owned (see CODEOWNERS)
 - Do not add dependencies without stating why in the PR; prefer what is already in `package.json`
 - If a request conflicts with these rules, say so and propose a compliant alternative instead of silently deviating
-- Custom agents: `@planner` (story → plan), `@implementer` (code), `@qa` (tests), `@reviewer` (read-only review). Prompts: `/story-to-plan`, `/figma-to-component`, `/pr-summary`, `/release-notes`
+- Custom agents: `@planner` (story → plan), `@implementer` (code), `@qa` (tests), `@reviewer` (read-only review), `@ado-auditor` (work item change-log comments). Prompts: `/story-to-plan`, `/figma-to-component`, `/pr-summary`, `/release-notes`
