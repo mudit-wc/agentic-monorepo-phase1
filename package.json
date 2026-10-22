@@ -37,7 +37,7 @@
     "@angular-devkit/core": "~22.1.0",
     "@angular-devkit/schematics": "~22.1.0",
     "@angular/build": "~22.1.0",
-    "@angular/cli": "~22.1.0",
+    "@angular/cli": "~22.2.4",
     "@angular/compiler-cli": "~22.1.0",
     "@angular/language-service": "~22.1.0",
     "@azure/functions": "^4.7.0",
